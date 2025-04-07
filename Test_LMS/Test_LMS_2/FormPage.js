@@ -3,7 +3,6 @@
 const { expect } = require('@playwright/test');
 const path = require('path');
 
-
 class FormPage {
   constructor(page) {
     this.page = page;
@@ -25,7 +24,6 @@ class FormPage {
     this.selectState = page.locator('//*[@id="react-select-3-input"]');
     this.selectCity = page.locator('//*[@id="city"]');
     this.submit = page.locator('//*[@class="btn btn-primary"]');
-
   }
 
   async goto() {
@@ -93,26 +91,19 @@ class FormPage {
   }
 
   async uploadFile() {
-    await this.picture
-    .setInputFiles(path.join(__dirname, 'Мед3.png'));
+    await this.picture.setInputFiles(path.join(__dirname, 'Мед3.png'));
   }
 
-  async fillCurrentAddress(){
-   await this.selectState.fill('Republic of Belarus')
-  }
-
-  async choiceStateAndCity(){
-    await this.selectState.click({ force: true })
+  async choiceStateAndCity() {
+    await this.selectState.click({ force: true });
     await this.page.locator('.css-yt9ioa-option >> text=Rajasthan').click();
-    await this.selectCity.click({force: true })
+    await this.selectCity.click({ force: true });
     await this.page.locator('.css-yt9ioa-option >> text=Jaiselmer').click();
   }
 
-  async submitForm(){
-    await this.submit.click()
+  async submitForm() {
+    await this.submit.click();
   }
-
-
 }
 
 module.exports = { FormPage };
