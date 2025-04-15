@@ -4,13 +4,12 @@ const { test, expect, chromium } = require('@playwright/test');
 const { FormPage } = require('./FormPage');
 const path = require('path');
 
-test.describe('Form', async () => {
+test.describe('Test of Form test with filling data  and submit', async () => {
    test('Success enter to the web site', async () => {
-    let formPage;
     const browser = await chromium.launch({ headless: false, slowMo: 1000 });
     const context = await browser.newContext();
     const page = await context.newPage();
-    formPage = new FormPage(page);
+    const formPage = new FormPage(page);
     await formPage.goto();
     await formPage.fillNameEmail('John', 'Doe', 'JohnDoe@gmail.com');
     await formPage.selectGender();
