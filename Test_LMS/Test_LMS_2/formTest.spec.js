@@ -15,7 +15,7 @@ test.describe('Form', async () => {
     await formPage.fillNameEmail('John', 'Doe', 'JohnDoe@gmail.com');
     await formPage.selectGender();
     await formPage.fillMobilePhone('1234567890');
-    await formPage.choiceOfBirthday(1, 1, 2000);
+    await formPage.selectBirthday(1, 1, 2000);
     await formPage.fillSubjects('english');
     await formPage.choiceOfHobbies();
     await formPage.uploadFile();

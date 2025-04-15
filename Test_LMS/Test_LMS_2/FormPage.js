@@ -64,7 +64,7 @@ class FormPage {
     await this.mobile.fill(phoneNumber);
   }
 
-  async choiceOfBirthday(day, month, year) {
+  async selectBirthday(day, month, year) {
     await this.birthday.click();
     await this.page
       .locator('//*[@class="react-datepicker__month-select"]')
