@@ -76,7 +76,7 @@ class FormPage {
 
     const days = await this.page.locator('.react-datepicker__day');
     const allDays = await days.allTextContents();
-    const targetDayIndex = allDays.findIndex((text) => text === `${day}`);
+    const targetDayIndex = allDays.findIndex((text) => text  === `${day}`);
     await days.nth(targetDayIndex).click();
   }
 

@@ -5,9 +5,9 @@ const { FormPage } = require('./FormPage');
 const path = require('path');
 
 test.describe('Form', async () => {
-  test('Success enter to the web site', async () => {
+   test('Success enter to the web site', async () => {
     let formPage;
-    const browser = await chromium.launch({ headless: false, slowMo: 500 });
+    const browser = await chromium.launch({ headless: false, slowMo: 1000 });
     const context = await browser.newContext();
     const page = await context.newPage();
     formPage = new FormPage(page);

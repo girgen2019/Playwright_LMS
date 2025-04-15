@@ -47,7 +47,7 @@ test.describe('Testing demoqa.com', () => {
       await page.locator('//*[@id="submit"]').click();
     });
 
-    await test.step('Checking of the data', async () => {
+     await test.step('Checking of the data', async () => {
       const expectName = await page.locator(
         '//*[@id="name" and @class="mb-1"]'
       );
