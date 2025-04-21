@@ -3,7 +3,7 @@
 const { expect } = require('@playwright/test');
 const path = require('path');
 
-class FormPage {
+class copyFormPage {
   constructor(page) {
     this.page = page;
     this.nameInput = page.locator('//*[@id="firstName"]');
@@ -12,10 +12,12 @@ class FormPage {
     this.genderRadioBtn1 = page.locator(
       '//*[@type="radio" and @id="gender-radio-1"]'
     );
-    this.genderRadioBtn2 = page.locator('//*[@id="gender-radio-2"]');
-    this.genderRadioBtn3 = page.locator('//*[@id="gender-radio-3"]');
-    this.mobile = page.locator('//*[@id="userNumber"]');
-    this.birthday = page.locator('//*[@id="dateOfBirthInput"]');
+    this.genderRadioBtn2 = page.locator('//*[@type="radio" and @id="gender-radio-2"]');
+    this.genderRadioBtn3 = page.locator(
+      '//*[@type="radio" and @id="gender-radio-3"]'
+    );
+    this.mobilePhoneInput = page.locator('//*[@id="userNumber"]');
+    this.birthdayInput = page.locator('//*[@id="dateOfBirthInput"]');
     this.subjectsInput = page.locator('//*[@id="subjectsInput"]');
     this.hobbiesSport = page.locator('//*[@id="hobbies-checkbox-1"]');
     this.hobbiesReading = page.locator('//*[@id="hobbies-checkbox-2"]');
@@ -23,7 +25,7 @@ class FormPage {
     this.picture = page.locator('//*[@id="uploadPicture"]');
     this.selectState = page.locator('//*[@id="react-select-3-input"]');
     this.selectCity = page.locator('//*[@id="city"]');
-    this.submit = page.locator('//*[@class="btn btn-primary"]');
+    this.submitButton = page.locator('//*[@class="btn btn-primary"]');
   }
 
   async goto() {
@@ -41,13 +43,13 @@ class FormPage {
 
     if (num === 1) {
       await this.genderRadioBtn1.waitFor({ state: 'visible' });
-      await this.genderRadioBtn1.check({ force: true });
+      await this.genderRadioBtn1.check({force: true});
     } else if (num === 2) {
       await this.genderRadioBtn2.waitFor({ state: 'visible' });
-      await this.genderRadioBtn2.check({ force: true });
+      await this.genderRadioBtn2.check({force: true});
     } else if (num === 3) {
       await this.genderRadioBtn3.waitFor({ state: 'visible' });
-      await this.genderRadioBtn3.check({ force: true });
+      await this.genderRadioBtn3.check({force: true});
     } else {
       throw new Error('Некорректный номер радио-кнопки');
     }
@@ -59,13 +61,13 @@ class FormPage {
       phoneNumber.length !== 10 ||
       isNaN(phoneNumber)
     ) {
-      throw new Error('Number of mobile phone have to contain 10 values');
+      throw new Error('Number of mobile phone have to contain 10 symbols');
     }
-    await this.mobile.fill(phoneNumber);
+    await this.mobilePhoneInput.fill(phoneNumber);
   }
 
   async selectBirthday(day, month, year) {
-    await this.birthday.click();
+    await this.birthdayInput.click();
     await this.page
       .locator('//*[@class="react-datepicker__month-select"]')
       .selectOption(`${month - 1}`);
@@ -76,18 +78,18 @@ class FormPage {
 
     const days = await this.page.locator('.react-datepicker__day');
     const allDays = await days.allTextContents();
-    const targetDayIndex = allDays.findIndex((text) => text  === `${day}`);
+    const targetDayIndex = allDays.findIndex((text) => text === `${day}`);
     await days.nth(targetDayIndex).click();
   }
 
   async fillSubjects(str) {
     await this.subjectsInput.fill(str);
+    await this.subjectsInput.click();
   }
 
-  async choiceOfHobbies() {
-    await this.subjectsInput.click({ force: true });
-    await this.hobbiesSport.click({ force: true });
-    await this.hobbiesReading.click({ force: true });
+  async chooseHobbies() {
+    await this.hobbiesSport.click({force:true});
+    await this.hobbiesReading.click({force:true});
   }
 
   async uploadFile() {
@@ -96,14 +98,14 @@ class FormPage {
 
   async choiceStateAndCity() {
     await this.selectState.click({ force: true });
-    await this.page.locator('.css-yt9ioa-option >> text=Rajasthan').click();
+    await this.page.locator('#react-select-3-option-3');
     await this.selectCity.click({ force: true });
-    await this.page.locator('.css-yt9ioa-option >> text=Jaiselmer').click();
+    await this.page.locator('.css-yt9ioa-option >> text=Jaiselmer').click({ force: true });
   }
 
   async submitForm() {
-    await this.submit.click();
+    await this.submitButton.click();
   }
 }
 
-module.exports = { FormPage };
+module.exports = { copyFormPage };

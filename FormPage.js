@@ -84,7 +84,7 @@ class FormPage {
     await this.subjectsInput.fill(str);
   }
 
-  async choiceOfHobbies() {
+  async selectHobbies() {
     await this.subjectsInput.click({ force: true });
     await this.hobbiesSport.click({ force: true });
     await this.hobbiesReading.click({ force: true });
