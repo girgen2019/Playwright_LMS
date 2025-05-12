@@ -15,8 +15,7 @@ test.describe('Test of Form test with filling data  and submit', async () => {
     await formPage.fillSubjects('english');
     await formPage.chooseHobbies();
     await formPage.uploadFile();
-    await formPage.choiceStateAndCity();
-    await formPage.submitForm();
+    await formPage.checkInfoAboutStateAndCity('Rajasthan', 'Jaiselmer');
+    await page.click('#submit');
   });
-
 });
