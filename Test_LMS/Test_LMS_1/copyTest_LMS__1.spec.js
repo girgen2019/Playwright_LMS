@@ -3,7 +3,13 @@
 // @ts-check
 import { test, expect, chromium } from '@playwright/test';
 test.describe('Testing demoqa.com', () => {
-  test('has title', async () => {
+  const getInfoForm = [
+    'John Doe',
+    'nil.goa@gmail.com',
+    'Los Angeles',
+    'Shabani',
+  ];
+  test('Should have the title "DEMOQA"', async () => {
     const browser = await chromium.launch({ headless: false, slowMo: 500 });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -11,12 +17,6 @@ test.describe('Testing demoqa.com', () => {
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/DEMOQA/);
     await test.step('Fill the form', async () => {
-      const getInfoForm = [
-        'John Doe',
-        'nil.goa@gmail.com',
-        'Los Angeles',
-        'Shabani',
-      ];
       await page.locator('#userName').fill(getInfoForm[0]);
       await page.locator('#userEmail').fill(getInfoForm[1]);
       await page.locator('#currentAddress').fill(getInfoForm[2]);
@@ -24,11 +24,8 @@ test.describe('Testing demoqa.com', () => {
       await expect(page.locator('#userName')).toHaveValue('John Doe');
       await expect(page.locator('#userEmail')).toHaveValue('nil.goa@gmail.com');
       await expect(page.locator('#currentAddress')).toHaveValue('Los Angeles');
-      await expect(page.locator('#permanentAddress')).toHaveValue('Shaban');
-      await page.locator('//*[@id="submit"]').click();
-    });
-    await test.step('Submit', async () => {
-      await page.locator('//*[@id="submit"]').click();
+      await expect(page.locator('#permanentAddress')).toHaveValue('Shabani');
+      await page.locator('#submit').click();
     });
     await test.step('Checking of the data', async () => {
       const expectName = await page.locator(

@@ -15,7 +15,7 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  testDir: './Test_LMS/Test_LMS_2',
+  testDir: './Test_LMS/Test_LMS_1',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -36,8 +36,9 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    
     {
-      name: 'chromium',
+      name: 'copyTest_LMS__1.spec.js',
       use: { ...devices['Desktop Chrome'], headless: true },
     },
 
