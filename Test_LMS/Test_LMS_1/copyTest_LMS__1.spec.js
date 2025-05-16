@@ -9,41 +9,26 @@ test.describe('Testing demoqa.com', () => {
     'Los Angeles',
     'Shabani',
   ];
-  test('Should have the title "DEMOQA"', async () => {
+  test('Validate form of "DEMOQA"', async () => {
     const browser = await chromium.launch({ headless: false, slowMo: 500 });
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto('https://demoqa.com/text-box');
-    // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/DEMOQA/);
-    await test.step('Fill the form', async () => {
-      await page.locator('#userName').fill(getInfoForm[0]);
-      await page.locator('#userEmail').fill(getInfoForm[1]);
-      await page.locator('#currentAddress').fill(getInfoForm[2]);
-      await page.locator('#permanentAddress').fill(getInfoForm[3]);
-      await expect(page.locator('#userName')).toHaveValue('John Doe');
-      await expect(page.locator('#userEmail')).toHaveValue('nil.goa@gmail.com');
-      await expect(page.locator('#currentAddress')).toHaveValue('Los Angeles');
-      await expect(page.locator('#permanentAddress')).toHaveValue('Shabani');
-      await page.locator('#submit').click();
-    });
-    await test.step('Checking of the data', async () => {
-      const expectName = await page.locator(
-        '//*[@id="name" and @class="mb-1"]'
-      );
-      const expectEmail = await page.locator(
-        '//*[@id="email" and @class="mb-1"]'
-      );
-      const expectCurrentAdress = await page.locator(
-        '//*[@id="currentAddress" and @class="mb-1"]'
-      );
-      const expectPermanentAdress = await page.locator(
-        '//*[@id="permanentAddress" and @class="mb-1"]'
-      );
-      await expect(expectName).toContainText('John Doe');
-      await expect(expectEmail).toContainText('nil.goa@gmail.com');
-      await expect(expectCurrentAdress).toContainText('Los Angeles');
-      await expect(expectPermanentAdress).toContainText('Shabani');
-    });
+
+    await page.locator('#userName').fill(getInfoForm[0]);
+    await page.locator('#userEmail').fill(getInfoForm[1]);
+    await page.locator('#currentAddress').fill(getInfoForm[2]);
+    await page.locator('#permanentAddress').fill(getInfoForm[3]);
+    await expect(page.locator('#userName')).toHaveValue('John Doe');
+    await expect(page.locator('#userEmail')).toHaveValue('nil.goa@gmail.com');
+    await expect(page.getByPlaceholder('Current Address')).toHaveValue('Los Angeles');
+    await expect(page.locator('#permanentAddress')).toHaveValue('Shabani');
+    await page.locator('#submit').click();
+
+    await expect(page.locator('#name')).toContainText('John Doe');
+    await expect(page.locator('#email')).toContainText('nil.goa@gmail.com');
+    await expect(page.locator('p#currentAddress.mb-1')).toContainText('Los Angeles');
+    await expect(page.locator('p#permanentAddress.mb-1')).toContainText('Shabani');
   });
 });

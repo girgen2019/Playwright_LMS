@@ -3,8 +3,8 @@ const { test, expect, chromium } = require('@playwright/test');
 const { copyFormPage } = require('../Test_LMS_2/copyFormPage');
 const path = require('path');
 
-test.describe('Test of Form test with filling data  and submit', async () => {
-   test('Success enter to the web site', async ({page}) => {
+test.describe('Validation of adding data to application', async () => {
+   test('Validate user sings in successfully', async ({page}) => {
    
     const formPage = new copyFormPage(page);
     await formPage.goto();
