@@ -64,7 +64,7 @@ class FormPage {
     await this.mobile.fill(phoneNumber);
   }
 
-  async choiceOfBirthday(day, month, year) {
+  async selectBirthday(day, month, year) {
     await this.birthday.click();
     await this.page
       .locator('//*[@class="react-datepicker__month-select"]')
@@ -76,7 +76,7 @@ class FormPage {
 
     const days = await this.page.locator('.react-datepicker__day');
     const allDays = await days.allTextContents();
-    const targetDayIndex = allDays.findIndex((text) => text === `${day}`);
+    const targetDayIndex = allDays.findIndex((text) => text  === `${day}`);
     await days.nth(targetDayIndex).click();
   }
 
@@ -84,7 +84,7 @@ class FormPage {
     await this.subjectsInput.fill(str);
   }
 
-  async choiceOfHobbies() {
+  async selectHobbies() {
     await this.subjectsInput.click({ force: true });
     await this.hobbiesSport.click({ force: true });
     await this.hobbiesReading.click({ force: true });
