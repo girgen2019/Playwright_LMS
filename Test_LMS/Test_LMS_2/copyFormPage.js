@@ -97,9 +97,10 @@ class copyFormPage {
 
   async checkInfoAboutStateAndCity(state, city) {
     await this.selectState.click({ force: true });
-    await this.page.locator(`#react-select-3-option-3:has-text("${state}")`).click();
+    await this.page.pause()
+    await this.page.locator(`div[class*="option"]:has-text("${state}")`).click();
     await this.selectCity.click({ force: true });
-    await this.page.locator(`#react-select-4-option-1 >> text="${city}"`).click();
+    await this.page.locator(`div[class*="option"]:has-text("${city}")`).click();
   }
 }
 
